@@ -58,6 +58,10 @@ namespace ChatBotIntegration{
 			}
 
 			var pb = State.Run.Last().PersonalBestSplitTime.RealTime;
+			if(State.CurrentTimingMethod == TimingMethod.GameTime){
+				pb = State.Run.Last().PersonalBestSplitTime.GameTime;
+			}
+
 			var sob = SumOfBest.CalculateSumOfBest(State.Run, State.Settings.SimpleSumOfBest, true, State.CurrentTimingMethod);
 			var wr = GetWorldRecord();
 
