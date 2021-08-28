@@ -67,7 +67,7 @@ namespace ChatBotIntegration{
 
 			string pbText = "N/A";
 			string sobText = "N/A";
-			string wrText = "Unknwon World Record";
+			string wrText = "Unknown World Record";
 			string runStatusText = "Unknown";
 
 			if(pb.HasValue){
