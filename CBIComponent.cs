@@ -105,10 +105,25 @@ namespace ChatBotIntegration{
 				}
 			}
 
-			System.IO.File.WriteAllText(Settings.TextFilePath + "\\PB.txt", pbText);
-			System.IO.File.WriteAllText(Settings.TextFilePath + "\\SoB.txt", sobText);
-			System.IO.File.WriteAllText(Settings.TextFilePath + "\\WR.txt", wrText);
-			System.IO.File.WriteAllText(Settings.TextFilePath + "\\RunStatus.txt", runStatusText);
+			string pbFile = Settings.TextFilePath + "\\PB.txt";
+			if(!System.IO.File.Exists(pbFile) || System.IO.File.ReadAllText(pbFile) != pbText){
+				System.IO.File.WriteAllText(pbFile, pbText);
+			}
+
+			string sobFile = Settings.TextFilePath + "\\SoB.txt";
+			if(!System.IO.File.Exists(sobFile) || System.IO.File.ReadAllText(sobFile) != sobText){
+				System.IO.File.WriteAllText(sobFile, sobText);
+			}
+
+			string wrFile = Settings.TextFilePath + "\\WR.txt";
+			if(!System.IO.File.Exists(wrFile) || System.IO.File.ReadAllText(wrFile) != wrText){
+				System.IO.File.WriteAllText(wrFile, wrText);
+			}
+
+			string rsFile = Settings.TextFilePath + "\\RunStatus.txt";
+			if(!System.IO.File.Exists(rsFile) || System.IO.File.ReadAllText(rsFile) != runStatusText){
+				System.IO.File.WriteAllText(rsFile, runStatusText);
+			}
 		}
 
 		public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode){}
