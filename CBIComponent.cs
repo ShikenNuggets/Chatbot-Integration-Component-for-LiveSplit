@@ -39,7 +39,7 @@ namespace ChatBotIntegration{
 			state.OnSkipSplit += OnUpdateNeeded;
 			state.OnUndoSplit += OnUpdateNeeded;
 			state.OnStart += OnUpdateNeeded;
-			state.RunManuallyModified += OnUpdateNeeded;
+			//state.RunManuallyModified += OnUpdateNeeded;
 
 			UpdateData();
 		}
