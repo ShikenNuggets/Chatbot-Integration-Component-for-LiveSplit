@@ -9,6 +9,7 @@ using System.Xml;
 using LiveSplit.Model;
 using LiveSplit.UI;
 using LiveSplit.UI.Components;
+using LiveSplit.WorldRecord.UI.Components;
 
 namespace ChatBotIntegration{
 	public class CBIComponent : LogicComponent{
@@ -69,6 +70,7 @@ namespace ChatBotIntegration{
 			string sobText = "N/A";
 			string wrText = "Unknown World Record";
 			string runStatusText = "Unknown";
+			string rulesLinkText = "";
 
 			if(pb.HasValue){
 				pbText = GetTimeString(pb.Value);
@@ -105,6 +107,8 @@ namespace ChatBotIntegration{
 				}
 			}
 
+			rulesLinkText = GetCategoryRulesLink();
+
 			string pbFile = Settings.TextFilePath + "\\PB.txt";
 			if(!System.IO.File.Exists(pbFile) || System.IO.File.ReadAllText(pbFile) != pbText){
 				System.IO.File.WriteAllText(pbFile, pbText);
@@ -124,20 +128,65 @@ namespace ChatBotIntegration{
 			if(!System.IO.File.Exists(rsFile) || System.IO.File.ReadAllText(rsFile) != runStatusText){
 				System.IO.File.WriteAllText(rsFile, runStatusText);
 			}
+
+			string rulesFile = Settings.TextFilePath + "\\RulesLink.txt";
+            if(!System.IO.File.Exists(rulesFile) || System.IO.File.ReadAllText(rulesFile) != rulesLinkText){
+				System.IO.File.WriteAllText(rulesFile, rulesLinkText);
+			}
 		}
 
 		public override void Update(IInvalidator invalidator, LiveSplitState state, float width, float height, LayoutMode mode){}
 
 		public override void Dispose(){}
 
-		private SpeedrunComSharp.Record GetWorldRecord(){
+		private WorldRecordComponent GetWorldRecordComponent(){
 			foreach(IComponent c in State.Layout.Components){
-				if(c != null && c is LiveSplit.WorldRecord.UI.Components.WorldRecordComponent wrc && wrc.WorldRecord != null){
-					return wrc.WorldRecord;
+				if(c != null && c is WorldRecordComponent wrc){
+					return wrc;
 				}
 			}
 
 			return null;
+		}
+
+		private SpeedrunComSharp.Record GetWorldRecord(){
+			var wrComponent = GetWorldRecordComponent();
+			if(wrComponent != null && wrComponent.WorldRecord != null){
+				return wrComponent.WorldRecord;
+			}
+
+			return null;
+		}
+
+		private string GetCategoryRulesLink(){
+			if(State.Run == null
+				|| State.Run.Metadata == null
+				|| State.Run.Metadata.Game == null
+				|| State.Run.Metadata.Game.WebLink == null
+				|| string.IsNullOrWhiteSpace(State.Run.Metadata.Game.Name)
+				|| string.IsNullOrWhiteSpace(State.Run.Metadata.Game.WebLink.ToString())
+				|| State.Run.Metadata.Category == null
+				|| string.IsNullOrWhiteSpace(State.Run.Metadata.Category.Name)
+				|| State.Run.Metadata.VariableValues == null){
+				return "";
+			}
+
+			var gameLink = State.Run.Metadata.Game.WebLink.ToString();
+			var categoryName = State.Run.Metadata.Category.Name.Replace(" ", "_").Replace("%", "");
+			var variables = State.Run.Metadata.VariableValues;
+
+			gameLink += "?h=" + categoryName;
+
+			foreach(var v in variables){
+				if(!v.Key.IsSubcategory || v.Value == null){
+					continue;
+				}
+
+				gameLink += "-" + v.Value.Value;
+			}
+
+			gameLink += "&rules=category";
+			return gameLink;
 		}
 
 		//I'm like 95% sure that C# already solved this problem and that I didn't need to write this function...
