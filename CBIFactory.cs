@@ -16,6 +16,6 @@ namespace ChatBotIntegration{
 		public string UpdateName => ComponentName;
 		public string XMLURL => "http://livesplit.org/update/Components/update.BotIntegration.xml";
 		public string UpdateURL => "http://livesplit.org/update/";
-		public Version Version => Version.Parse("0.1.1");
+		public Version Version => Version.Parse("1.2.0");
 	}
 }

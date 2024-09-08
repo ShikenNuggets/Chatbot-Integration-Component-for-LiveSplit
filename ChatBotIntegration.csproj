@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ChatBotIntegration</RootNamespace>
     <AssemblyName>ChatBotIntegration</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,20 +55,24 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveSplit\LiveSplit\Components\LiveSplit.WorldRecord\LiveSplit.WorldRecord.csproj">
-      <Project>{b0470637-949c-4a41-9c8c-0ce46561037f}</Project>
+    <ProjectReference Include="..\LiveSplit\components\LiveSplit.WorldRecord\src\LiveSplit.WorldRecord\LiveSplit.WorldRecord.csproj">
+      <Project>{d1e39041-ea68-414c-9c52-98bc1c1c5e25}</Project>
       <Name>LiveSplit.WorldRecord</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiveSplit\LiveSplit\Libs\SpeedrunComSharp\SpeedrunComSharp\SpeedrunComSharp.csproj">
-      <Project>{924aaffe-5b89-49e2-99ad-ec9373cc838d}</Project>
+    <ProjectReference Include="..\LiveSplit\lib\SpeedrunComSharp\src\SpeedrunComSharp\SpeedrunComSharp.csproj">
+      <Project>{d97ba6c2-9b40-4e2d-8613-16ffff031d8e}</Project>
       <Name>SpeedrunComSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiveSplit\LiveSplit\LiveSplit.Core\LiveSplit.Core.csproj">
-      <Project>{6de847db-20a3-4848-aeee-1b4364aecdfb}</Project>
+    <ProjectReference Include="..\LiveSplit\src\LiveSplit.Core\LiveSplit.Core.csproj">
+      <Project>{26d65334-18e2-4c86-9bf3-193fdcb6886a}</Project>
       <Name>LiveSplit.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LiveSplit\LiveSplit\UpdateManager\UpdateManager.csproj">
-      <Project>{56dea3a0-2eb7-493b-b50f-a5e3aa8ae52a}</Project>
+    <ProjectReference Include="..\LiveSplit\src\LiveSplit\LiveSplit.csproj">
+      <Project>{a6164b47-3c1c-472d-8de5-cecf10619f2d}</Project>
+      <Name>LiveSplit</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveSplit\src\UpdateManager\UpdateManager.csproj">
+      <Project>{d995ff48-716d-4d47-81da-6a2c0a8f0f8e}</Project>
       <Name>UpdateManager</Name>
     </ProjectReference>
   </ItemGroup>
